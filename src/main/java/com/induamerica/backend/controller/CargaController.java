@@ -1,6 +1,8 @@
 package com.induamerica.backend.controller;
 
 import com.induamerica.backend.dto.CargaRequest;
+import com.induamerica.backend.dto.ReporteFrecuenciaDTO;
+import com.induamerica.backend.dto.ReporteRecepcionDTO;
 import com.induamerica.backend.model.Carga;
 import com.induamerica.backend.repository.CargaRepository;
 import com.induamerica.backend.service.CargaService;
@@ -43,6 +45,16 @@ public class CargaController {
         request.setDuenoCarreta(duenoCarreta);
 
         return cargaService.registrarCargaConBultos(request, file);
+    }
+
+    @GetMapping("/reporte-recepcion/{idCarga}")
+    public ResponseEntity<ReporteRecepcionDTO> getReporteRecepcion(@PathVariable int idCarga) {
+        return ResponseEntity.ok(cargaService.generarReporteRecepcion(idCarga));
+    }
+
+    @GetMapping("/reporte-frecuencia/{idCarga}")
+    public ResponseEntity<ReporteFrecuenciaDTO> getReporteFrecuencia(@PathVariable int idCarga) {
+        return ResponseEntity.ok(cargaService.generarReporteFrecuencia(idCarga));
     }
 
 }
